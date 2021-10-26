@@ -43,7 +43,7 @@
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1mx4zy0" sourceRef="interview" targetRef="ExclusiveGateway_1yllchs" />
     <bpmn:sequenceFlow id="SequenceFlow_0xyw85w" name="nein" sourceRef="ExclusiveGateway_07dl29r" targetRef="declineApplicant">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!positive_Impression}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0up7o29" name="nein" sourceRef="ExclusiveGateway_1yllchs" targetRef="declineApplicant">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!succesful}</bpmn:conditionExpression>
@@ -56,10 +56,12 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1scllrn" sourceRef="checkApplication" targetRef="ExclusiveGateway_1xnj33m" />
     <bpmn:sequenceFlow id="SequenceFlow_1pyq2os" sourceRef="StartEvent_1" targetRef="checkApplication" />
-    <bpmn:sequenceFlow id="Flow_1ahqvyo" name="nein" sourceRef="ExclusiveGateway_1xnj33m" targetRef="declineApplicant" />
+    <bpmn:sequenceFlow id="Flow_1ahqvyo" name="nein" sourceRef="ExclusiveGateway_1xnj33m" targetRef="declineApplicant">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!application_complete}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0jt39px" sourceRef="qualifyApplicant" targetRef="ExclusiveGateway_07dl29r" />
     <bpmn:sequenceFlow id="Flow_08xxnj5" name="ja" sourceRef="ExclusiveGateway_07dl29r" targetRef="Activity_0u9ic8g">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${positive_Impression}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_01mfmnj" sourceRef="Activity_0u9ic8g" targetRef="interview" />
     <bpmn:userTask id="qualifyApplicant" name="Bewerbung prüfen" camunda:assignee="admin">
@@ -102,10 +104,10 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1lkyaqw">
       <bpmndi:BPMNShape id="Participant_15wkf2l_di" bpmnElement="Participant_00uiudu" isHorizontal="true">
-        <dc:Bounds x="160" y="87" width="1270" height="76" />
+        <dc:Bounds x="160" y="87" width="1310" height="76" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0nv4805_di" bpmnElement="Participant_0nv4805" isHorizontal="true">
-        <dc:Bounds x="160" y="191" width="1270" height="369" />
+        <dc:Bounds x="160" y="191" width="1310" height="369" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1mx4zy0_di" bpmnElement="SequenceFlow_1mx4zy0">
         <di:waypoint x="1130" y="302" />

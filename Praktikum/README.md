@@ -9,10 +9,10 @@ Dieses Repository ist für Interviews mit Interessenten auf einen Praktikumsplatz
 4. Erkläre den Unterschied (bzw. die Gemeinsamkeiten) zwischen den beiden Tasks "Bewerbung prüfen" sowie den zwischen den Aktivitäten "Bewerber einladen" und "Bewerber zusagen"
 
 ## Verständnis von Camunda WebApps 
-1. Starte die Spring-Boot-Anwendung mit mvn spring-boot:run
+1. Starte die Anwendung
 2. Navigiere auf den geeigneten Port im localhost, um die WebApps aufzurufen
 3. Entnimm die Credentials aus der application.yaml-Datei um dich anzumelden
-4. Instanziiere einen Prozess über die Tasklist und prozessiere ihn zu einem positiven Ende
+4. Instanziiere einen Prozess über die Tasklist und prozessiere ihn zu einem positiven Ende. Verwende dabei einen Bewerbungstext mit mehr als 10 Zeichen
 
 ## Modellierung
 1. Ergänze das Modell dahingehend, dass im Falle einer unvollständigeng Bewerbung anstatt einer direkten Absage eine Nachricht an den Bewerber mit Bitte um Vervollständigung der Unterlagen versandt wird. Daraufhin soll auf den erneuten Eingang von Bewerbungsunterlagen gewartet werden, die dann wie die initialen Unterlagen geprüft werden sollen.
@@ -30,5 +30,3 @@ Dieses Repository ist für Interviews mit Interessenten auf einen Praktikumsplatz
 2. Ergänze die Klasse 'ApplicationProcessVariables' um einen Eintrag für die Prozessvariable
 3. Ergänze die Klasse 'ApplicationProcessConstants' um getter für diese Prozessvariable
 4. Nutze diese getter, um in allen Klassen, in denen Nachrichten versandt werden, den Namen des Bewerbers einzubinden.
-
-

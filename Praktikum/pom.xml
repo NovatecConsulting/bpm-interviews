@@ -33,13 +33,20 @@
     	</dependency>
     	<dependency>
       		<groupId>com.h2database</groupId>
-      		<artifactId>h2</artifactId>
+      		<artifactId>h2</artifactId>      		
+      		<version>1.4.199</version>
     		</dependency>
     	<dependency>
       		<groupId>com.sun.xml.bind</groupId>
       		<artifactId>jaxb-impl</artifactId>
       		<version>2.3.5</version>
     	</dependency>
+
+	    <!-- required to use H2 as a file based database  (Otherwise it's In-Memory) -->
+	    <dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-jdbc</artifactId>
+	    </dependency>
   </dependencies>
   
    <build>
