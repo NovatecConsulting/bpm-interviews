@@ -1,5 +1,5 @@
 # Praktikum
-Dieses Repository ist für Interviews mit Interessenten auf einen Praktikumsplatz ausgelegt
+Dieses Projekt ist für Interviews mit Interessenten auf einen Praktikumsplatz ausgelegt
 
 # Aufgaben
 ## Grundlagen Modellierungsverständnis
