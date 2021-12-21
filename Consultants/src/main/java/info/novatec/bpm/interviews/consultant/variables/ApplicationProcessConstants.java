@@ -1,4 +1,4 @@
-package info.novatec.bpm.interviews.praktikum.variables;
+package info.novatec.bpm.interviews.consultant.variables;
 
 /**
  * Interface holding the name of all process variables. According to Camunda best practices.

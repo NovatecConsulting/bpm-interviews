@@ -1,10 +1,10 @@
-package info.novatec.bpm.interviews.praktikum.delegates;
+package info.novatec.bpm.interviews.consultant.delegates;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
 
-import info.novatec.bpm.interviews.praktikum.variables.ApplicationProcessVariables;
+import info.novatec.bpm.interviews.consultant.variables.ApplicationProcessVariables;
 
 /**
  * Service Task implementation for validating a new application.

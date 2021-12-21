@@ -1,4 +1,4 @@
-package info.novatec.bpm.interviews.praktikum.variables;
+package info.novatec.bpm.interviews.consultant.variables;
 
 import org.camunda.bpm.engine.delegate.VariableScope;
 

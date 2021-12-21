@@ -1,4 +1,4 @@
-package info.novatec.bpm.interviews.praktikum.delegates;
+package info.novatec.bpm.interviews.consultant.delegates;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;

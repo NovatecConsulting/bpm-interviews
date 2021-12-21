@@ -1,14 +1,9 @@
-package info.novatec.bpm.interviews.praktikum;
+package info.novatec.bpm.interviews.consultant;
 
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * Main class running the application with embedded camunda engine.
- * 
- * @author Ben Fuernrohr
- */
 @SpringBootApplication
 @EnableProcessApplication
 public class ApplicationApp {
