@@ -11,4 +11,29 @@ public class StartAplicationData {
     
     @ApiModelProperty(value = "Name of the applicant", example = "Max Mustermann")
     private String applicantName;
+
+    public StartAplicationData() {
+        
+    }
+    
+    public StartAplicationData(String applicationKey, String applicantName) {
+        this.applicationKey = applicationKey;
+        this.applicantName = applicantName;
+    }
+
+    public String getApplicationKey() {
+        return this.applicationKey;
+    }
+    
+    public void setApplicationKey(String applicationKey) {
+        this.applicationKey = applicationKey;
+    }
+    
+    public String getApplicantName() {
+        return this.applicantName;
+    }
+    
+    public void setApplicantName(String applicantName) {
+        this.applicantName = applicantName;
+    }
 }

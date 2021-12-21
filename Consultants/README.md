@@ -28,6 +28,6 @@ Dieses Projekt ist für Interviews mit Interessenten auf eine Anstellung zum Cons
 4. Ergänze geeignete Tests, um 100% Testabdeckung zu erreichen
 
 ## Java-und Rest-Integration
-1. Starte die Anwendung und navigiere auf die Seite des Swagger-UIs
-2. Erkläre im groben die Funktionalität von Swagger und teste die vorgefertigten Endpunkte
+1. Starte die Anwendung und navigiere auf die Seite des Swagger-UIs (http://localhost:8080/swagger-ui.html)
+2. Erkläre im Groben die Funktionalität von Swagger und teste die vorgefertigten Endpunkte
 3. Ergänze die Implementierungen zu den vorgefertigten Endpunkten und verifiziere ihre Funktionalität

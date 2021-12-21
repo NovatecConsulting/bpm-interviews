@@ -10,5 +10,30 @@ public class ApplicationOverview {
     private String applicationKey;
     
     @ApiModelProperty("Name of the applicant")
-    private String applicantName;    
+    private String applicantName;
+    
+    public ApplicationOverview() {
+        
+    }
+    
+    public ApplicationOverview(String applicationKey, String applicantName) {
+        this.applicationKey = applicationKey;
+        this.applicantName = applicantName;
+    }
+
+    public String getApplicationKey() {
+        return this.applicationKey;
+    }
+    
+    public void setApplicationKey(String applicationKey) {
+        this.applicationKey = applicationKey;
+    }
+    
+    public String getApplicantName() {
+        return this.applicantName;
+    }
+    
+    public void setApplicantName(String applicantName) {
+        this.applicantName = applicantName;
+    }   
 }
