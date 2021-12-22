@@ -4,7 +4,7 @@ import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.assertT
 import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.complete;
 import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.task;
 import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.withVariables;
-import static org.camunda.bpm.extension.mockito.CamundaMockito.registerMockInstance;
+import static org.camunda.bpm.extension.mockito.CamundaMockito.registerJavaDelegateMock;
 import static org.camunda.bpm.extension.mockito.CamundaMockito.verifyJavaDelegateMock;
 
 import org.camunda.bpm.engine.RuntimeService;
@@ -38,10 +38,10 @@ public class ApplicationTest {
     public void setup() {
         runtimeService = rule.getRuntimeService();
 
-        registerMockInstance(ApplicationTester.class);
-        registerMockInstance(InterviewInvitationSender.class);
-        registerMockInstance(ApplicationDenialSender.class);
-        registerMockInstance(JobOfferSender.class);
+        registerJavaDelegateMock(ApplicationTester.class);
+        registerJavaDelegateMock(InterviewInvitationSender.class);
+        registerJavaDelegateMock(ApplicationDenialSender.class);
+        registerJavaDelegateMock(JobOfferSender.class);
     }
 
     @Test
@@ -73,8 +73,8 @@ public class ApplicationTest {
     @Test
     public void testAutomatedApplicationDenial() {
         ProcessInstance processInstance = runtimeService.createProcessInstanceByKey(PROCESS_DEFINITION_KEY)
-            .startBeforeActivity("Gateway_BewerbungVollstaendig")
-            .setVariable("application_complete", true)
+            .startBeforeActivity("Gateway_Bewerbung")
+            .setVariable("application_complete", false)
             .execute();
         
         assertThat(processInstance).hasPassed("EndTask_BewerberAbsagen");
