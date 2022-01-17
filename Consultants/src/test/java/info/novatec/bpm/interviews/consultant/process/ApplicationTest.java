@@ -73,8 +73,8 @@ public class ApplicationTest {
     @Test
     public void testAutomatedApplicationDenial() {
         ProcessInstance processInstance = runtimeService.createProcessInstanceByKey(PROCESS_DEFINITION_KEY)
-            .startBeforeActivity("Gateway_Bewerbung")
-            .setVariable("application_complete", false)
+            .startBeforeActivity("Gateway_BewerbungVollstaendig")
+            .setVariable("application_complete", true)
             .execute();
         
         assertThat(processInstance).hasPassed("EndTask_BewerberAbsagen");
