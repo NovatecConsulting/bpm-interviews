@@ -2,7 +2,6 @@ package info.novatec.bpm.interviews.consultant.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +17,11 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 public class ApplicationController {
 	
-	@Autowired
 	private final BewerbungService bewerbungService;
+	
+	public ApplicationController(BewerbungService bewerbungService) {
+		this.bewerbungService = bewerbungService;
+	}
     
     private static final String APPLICATION_BASE_PATH = "application";
 
@@ -27,7 +29,7 @@ public class ApplicationController {
     @ApiOperation("Start a new application process")
     public void startApplication(@RequestBody StartAplicationData startApplicationData) {
 		bewerbungService.startBewerbungProzess(startApplicationData.getApplicantName(),
-				startApplicationData.getApplicantName());
+				startApplicationData.getApplicationKey());
     }
     
     @GetMapping(APPLICATION_BASE_PATH + "/{applicationKey}/getTasks")
