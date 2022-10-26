@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1fch522" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0">
+  <bpmn:message id="Message_0g61zlf" name="newApplication" />
+  <bpmn:message id="Message_0so59yp" name="cancellationMessage" />
+  <bpmn:message id="Message_0ngf4ln" />
+  <bpmn:message id="Message_0lqc5nx" name="InterviewInvitation" />
+  <bpmn:message id="Message_1qaud8n" name="jobOffer" />
+  <bpmn:message id="Message_1bobvwe" name="additionalInfoMessage" />
+  <bpmn:message id="Message_0rwwx4c" name="additionalInformationMessage" />
+  <bpmn:message id="Message_1bbnl2c" name="declination" />
+  <bpmn:process id="application_process" name="Bewerbungsprozess" isExecutable="true">
+    <bpmn:endEvent id="EndTask_BewerberAbsagen" name="Bewerber absagen">
+      <bpmn:incoming>Flow_0y1ahah</bpmn:incoming>
+      <bpmn:incoming>Flow_1hq97uz</bpmn:incoming>
+      <bpmn:incoming>Flow_0k4092u</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1lm0lxr" messageRef="Message_1bbnl2c" camunda:delegateExpression="${applicationDenialSender}" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndTask_BewerberZusagen" name="Bewerber zusagen">
+      <bpmn:incoming>Flow_0b0kq42</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_06a1kx0" messageRef="Message_1qaud8n" camunda:delegateExpression="${jobOfferSender}" />
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_KandidatGeeignet" name="Geeigneter Kandidat?">
+      <bpmn:incoming>Flow_02aso5g</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tr6iiy</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0y1ahah</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sendTask id="SendTask_BewerberEinladen" name="Bewerber einladen" camunda:delegateExpression="${interviewInvitationSender}">
+      <bpmn:incoming>Flow_0tr6iiy</bpmn:incoming>
+      <bpmn:outgoing>Flow_1blq7en</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:userTask id="UserTask_BewerbungPruefen" name="Bewerbung prüfen" camunda:assignee="admin">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="approved" label="Approved?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1yoizby</bpmn:incoming>
+      <bpmn:outgoing>Flow_02aso5g</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:startEvent id="Event_0aeiwvp">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="applicantName" label="Name des Bewerbers" type="string" />
+          <camunda:formField id="applicationContent" label="Bewerbungstext" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1e8o2d3</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_GespraechGutGelaufen" name="Gespräch gut gelaufen?">
+      <bpmn:incoming>Flow_1i4l1v6</bpmn:incoming>
+      <bpmn:outgoing>Flow_0b0kq42</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1hq97uz</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="ServiceTask_BewerbungPruefen" name="Bewerbung prüfen" camunda:delegateExpression="${applicationTester}">
+      <bpmn:incoming>Flow_1e8o2d3</bpmn:incoming>
+      <bpmn:outgoing>Flow_05roayd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="UserTask_BewerbungsgespraechFueren" name="Bewerbungsgespräch" camunda:assignee="admin">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="succesful" label="Succesful?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1blq7en</bpmn:incoming>
+      <bpmn:outgoing>Flow_1i4l1v6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_Bewerbung" name="Bewerbung vollständig?">
+      <bpmn:incoming>Flow_05roayd</bpmn:incoming>
+      <bpmn:outgoing>Flow_1yoizby</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0k4092u</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0b0kq42" name="ja" sourceRef="Gateway_GespraechGutGelaufen" targetRef="EndTask_BewerberZusagen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${succesful}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_02aso5g" sourceRef="UserTask_BewerbungPruefen" targetRef="Gateway_KandidatGeeignet" />
+    <bpmn:sequenceFlow id="Flow_0tr6iiy" name="ja" sourceRef="Gateway_KandidatGeeignet" targetRef="SendTask_BewerberEinladen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1blq7en" sourceRef="SendTask_BewerberEinladen" targetRef="UserTask_BewerbungsgespraechFueren" />
+    <bpmn:sequenceFlow id="Flow_1yoizby" name="ja" sourceRef="Gateway_Bewerbung" targetRef="UserTask_BewerbungPruefen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${application_complete}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1e8o2d3" sourceRef="Event_0aeiwvp" targetRef="ServiceTask_BewerbungPruefen" />
+    <bpmn:sequenceFlow id="Flow_1i4l1v6" sourceRef="UserTask_BewerbungsgespraechFueren" targetRef="Gateway_GespraechGutGelaufen" />
+    <bpmn:sequenceFlow id="Flow_05roayd" sourceRef="ServiceTask_BewerbungPruefen" targetRef="Gateway_Bewerbung" />
+    <bpmn:sequenceFlow id="Flow_0k4092u" name="nein" sourceRef="Gateway_Bewerbung" targetRef="EndTask_BewerberAbsagen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!application_complete}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0y1ahah" name="nein" sourceRef="Gateway_KandidatGeeignet" targetRef="EndTask_BewerberAbsagen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!approved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1hq97uz" name="nein" sourceRef="Gateway_GespraechGutGelaufen" targetRef="EndTask_BewerberAbsagen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!succesful}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="application_process">
+      <bpmndi:BPMNEdge id="Flow_1hq97uz_di" bpmnElement="Flow_1hq97uz">
+        <di:waypoint x="1090" y="167" />
+        <di:waypoint x="1090" y="310" />
+        <di:waypoint x="1252" y="310" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1104" y="185" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0y1ahah_di" bpmnElement="Flow_0y1ahah">
+        <di:waypoint x="670" y="167" />
+        <di:waypoint x="670" y="310" />
+        <di:waypoint x="1252" y="310" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="675" y="185" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0k4092u_di" bpmnElement="Flow_0k4092u">
+        <di:waypoint x="395" y="167" />
+        <di:waypoint x="395" y="310" />
+        <di:waypoint x="1252" y="310" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="409" y="173" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05roayd_di" bpmnElement="Flow_05roayd">
+        <di:waypoint x="310" y="142" />
+        <di:waypoint x="370" y="142" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1i4l1v6_di" bpmnElement="Flow_1i4l1v6">
+        <di:waypoint x="1010" y="142" />
+        <di:waypoint x="1065" y="142" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1e8o2d3_di" bpmnElement="Flow_1e8o2d3">
+        <di:waypoint x="148" y="142" />
+        <di:waypoint x="210" y="142" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yoizby_di" bpmnElement="Flow_1yoizby">
+        <di:waypoint x="420" y="142" />
+        <di:waypoint x="480" y="142" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="447" y="124" width="9" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1blq7en_di" bpmnElement="Flow_1blq7en">
+        <di:waypoint x="850" y="142" />
+        <di:waypoint x="910" y="142" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tr6iiy_di" bpmnElement="Flow_0tr6iiy">
+        <di:waypoint x="695" y="142" />
+        <di:waypoint x="750" y="142" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="716" y="123" width="9" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02aso5g_di" bpmnElement="Flow_02aso5g">
+        <di:waypoint x="580" y="142" />
+        <di:waypoint x="645" y="142" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0b0kq42_di" bpmnElement="Flow_0b0kq42">
+        <di:waypoint x="1115" y="142" />
+        <di:waypoint x="1252" y="142" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1151" y="125" width="9" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0y0hrip_di" bpmnElement="EndTask_BewerberAbsagen">
+        <dc:Bounds x="1252" y="292" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1246" y="335" width="49" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_15u5xhr_di" bpmnElement="EndTask_BewerberZusagen">
+        <dc:Bounds x="1252" y="124" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1246" y="167" width="49" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1p2jrtb_di" bpmnElement="Gateway_KandidatGeeignet" isMarkerVisible="true">
+        <dc:Bounds x="645" y="117" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="642" y="85" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ipjadw_di" bpmnElement="SendTask_BewerberEinladen">
+        <dc:Bounds x="750" y="102" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0cjzo6b_di" bpmnElement="UserTask_BewerbungPruefen">
+        <dc:Bounds x="480" y="102" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0aeiwvp_di" bpmnElement="Event_0aeiwvp">
+        <dc:Bounds x="112" y="124" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1friphm_di" bpmnElement="Gateway_GespraechGutGelaufen" isMarkerVisible="true">
+        <dc:Bounds x="1065" y="117" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1057" y="87" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1hes6dr_di" bpmnElement="ServiceTask_BewerbungPruefen">
+        <dc:Bounds x="210" y="102" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gdqg6a_di" bpmnElement="UserTask_BewerbungsgespraechFueren">
+        <dc:Bounds x="910" y="102" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0rrcqlq_di" bpmnElement="Gateway_Bewerbung" isMarkerVisible="true">
+        <dc:Bounds x="370" y="117" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="366" y="81" width="58" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
