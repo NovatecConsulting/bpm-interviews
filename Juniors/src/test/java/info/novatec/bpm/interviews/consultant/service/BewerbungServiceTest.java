@@ -4,6 +4,8 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import info.novatec.bpm.interviews.junior.service.BewerbungService;
+
 public class BewerbungServiceTest {
 
 	@Test
