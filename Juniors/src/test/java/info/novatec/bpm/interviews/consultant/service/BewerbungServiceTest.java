@@ -3,9 +3,7 @@ package info.novatec.bpm.interviews.consultant.service;
 import org.camunda.bpm.engine.RuntimeService;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.springframework.stereotype.Component;
 
-@Component
 public class BewerbungServiceTest {
 
 	@Test
