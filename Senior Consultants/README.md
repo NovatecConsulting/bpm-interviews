@@ -1,30 +1,31 @@
 # Consultants
-Dieses Projekt ist für Interviews mit Interessenten auf eine Anstellung zum Consultant ausgelegt
+This project is designed for interviews with candidates interested in becoming a consultant
 
-# Aufgaben
+# Tasks
 
-## Grundlagen Betrieb Camunda Platform
-1. Klone das Repository und importiere das Projekt in deine Entwicklungsumgebung
-2. Erkläre, wie die vorliegende Form des Betriebs von Camunda Platform bezeichnet wird
-3. Nenne zwei weitere Formen des Betriebs von Camunda Platform
+## Basics of Camunda Platform operation
+1. clone the repository and import the project into your development environment
+2. explain what the present form of Camunda Platform operation is called
+3. name two other forms of Camunda Platform operation
 
-## Grundlagen Prozessmanagement
-1. Öffne die Datei 'application.bpmn' mit dem Camunda Modeler
-2. Erkläre mit Worten das dargestellte Prozessmodell3. 
-3. Erkläre, ob es sich um ein strategisches, operatives oder technisches Prozessmodell handelt und worin die Unterschiede zwischen diesen Prozessmodell-Arten liegen
-4. Nenne drei Aspekte, die an diesem Prozessmodell verbessert werden können
+## Basics of process management
+1. open the file 'application.bpmn' with the Camunda Modeler
+2. explain in words the process model shown.
+3. explain whether it is a strategic, operational or technical process model and what the differences are between these types of process model
+4. name three aspects that can be improved in this process model
 
-## Modellierung
-1. In diesem Modell besteht das Problem, dass der Vertrag weiter vorbereitet wird, wenn das Bewerbungsgespräch nicht gut gelaufen ist und dem Bewerber abgesagt wurde. Wie lässt sich dieses Problem lösen und kannst du es ausmodellieren?
-2. Ergänze das Modell so, dass eine Absage durch den Bewerber jederzeit möglich ist.
+## Modeling
+1. in this model, the problem is that the contract continues to be prepared if the interview did not go well and the applicant was rejected. How can this problem be solved and can you model it out?
+2. complete the model in such a way that a rejection by the applicant is possible at any time.
 
 ## Testing
-1. Öffne den Unit-Test für dieses Prozessmodell. Erkläre ob es sich um eine JUnit4 oder JUnit5-Testklasse handelt.
-2. Behebe den fehlschlagenden Test
-3. Stelle die Testklasse so ein, dass sie eine vollständige Abdeckung (100%) des Prozessmodells erfordert und andernfalls fehlschlägt
-4. Ergänze geeignete Tests, um 100% Testabdeckung zu erreichen
+1. Open the unit test for this process model. Explain whether it is a JUnit4 or JUnit5 test class.
+2. fix the failing test
+3. set the test class so that it requires full coverage (100%) of the process model and fails otherwise
+4. add suitable tests to achieve 100% test coverage
 
-## Java-und Rest-Integration
-1. Betrachte den Sourcecode ausgehend von der Klasse "ApplicationController". Erkläre, nach welchem Architekturmodell der Code aufgebaut ist.
-2. Erkläre die Vorteile dieses Modells.
-3. Ergänze die Implementierungen zu den vorgefertigten Endpunkten und verifiziere ihre Funktionalität, indem du die Anwendung startest und auf das Swagger-UI navigierst (http://localhost:8080/swagger-ui.html)
+
+## Java and Rest integration
+1. view the source code starting from the "ApplicationController" class. Explain which architecture model the code is based on.
+2. explain the advantages of this model.
+3. add the implementations to the prefabricated endpoints and verify their functionality by starting the application and navigating to the Swagger UI (http://localhost:8080/swagger-ui.html)
